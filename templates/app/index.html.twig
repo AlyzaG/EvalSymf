@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'Panier'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div>
+            <h1>{{'Contenu du panier'|trans}}</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">{{'Nom'|trans}}</th>
+                    <th scope="col">{{'Quantité'|trans}}</th>
+                    <th scope="col">{{'Montant'|trans}}</th>
+                </tr>
+                </thead>
+                {% for panier in panier %}
+                <tbody>
+                        <tr>
+                            <td>{{ panier.produit.nom }}</td>
+                            <td>{{ panier.quantite }}</td>
+                            <td>{{ panier.produit.prix }}</td>
+                            <td>
+                                <a href="{{ path('home') }}"><button class="btn btn-danger">{{'Supprimer'|trans}}</button></a>
+                            </td>
+                        </tr>
+                </tbody>
+                {% endfor %}
+                <div>
+                </div>
+            </table>
+            <span class="badge badge-secondary">{{ Quantite }}€</span>
+            <span class="badge badge-secondary">{{ Quantite }} {{ 'Produit(s)' |trans}}</span>
+        </div>
+    </div>
+{% endblock %}

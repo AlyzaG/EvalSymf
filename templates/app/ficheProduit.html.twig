@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'Fiche Produit'|trans}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ produit.nom }}</h1>
+        <div class="row">
+            <div class="col-6">
+                {% if produit.image is not null %}
+                    <img src="{{ asset('assets/images/' ~ produit.image) }}" width="300px"/>
+                {% endif %}
+                <p>{{'Quantité'|trans}}: {{ produit.quantite }}</p>
+                <p>{{ produit.prix }}€</p>
+            </div>
+        </div>
+
+        <h1>{{ 'Ajouter au panier' |trans}}</h1>
+
+        <div class="col-6" style='padding: 20px'>
+            {{ form_start(formPanier) }}
+
+            {{ form_row(formPanier.quantite) }}
+            {{ form_end(formPanier) }}
+            <br>
+            <a href="{{path('remove', {id: produit.id})}}" class="btn btn-danger">{{'supprimer le produit'|trans}}</a>
+        </div>
+
+    </div>
+{% endblock %}

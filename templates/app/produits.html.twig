@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{'Produit'|trans}}{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1>{{'Produit'|trans}}</h1>
+                {% if produit is not empty %}
+                    <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">{{'Photo'|trans}}</th>
+                        <th scope="col">{{'Nom'|trans}}</th>
+                        <th scope="col">{{'Quantité'|trans}}</th>
+                        <th scope="col">{{'Prix'|trans}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for produit in produit %}
+                        <tr>
+                            <td>
+                                {% if produit.image is not null %}
+                                    <img src="{{ asset('assets/images/' ~ produit.image) }}" style="height:18rem"/>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a class="nav-link" href="{{path('ficheProduit', {id: produit.id})}}">{{ produit.nom }}</a>
+                            </td>
+                            <td>{{ produit.quantite }}</td>
+                            <td>{{ produit.prix }}</td>
+
+                        </tr>
+
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+            <p>{{"Il n'y a pas de produit"|trans}}</p>
+                {% endif %}
+
+                    <div class="row">
+                        {{form_start(formProduit)}}
+                        {{form_row(formProduit.nom)}}
+                        {{form_row(formProduit.image)}}
+                        {{form_row(formProduit.quantite)}}
+                        {{form_row(formProduit.prix)}}
+                        {{form_end(formProduit)}}
+                    </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
