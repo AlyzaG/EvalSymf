@@ -13,7 +13,6 @@ class NewController extends AbstractController
     public function index()
     {
         return $this->render('new/index.html.twig', [
-            'controller_name' => 'NewController',
         ]);
     }
 }
