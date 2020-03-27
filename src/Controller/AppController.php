@@ -16,11 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class AppController extends AbstractController
 {
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
     public function index(Request $request,  EntityManagerInterface $entityManager)
     {
-        try {
 
             $PanierRepository = $this->getDoctrine()
                 ->getRepository(Panier::class)
@@ -29,9 +28,7 @@ class AppController extends AbstractController
             $ProduitRepository = $this->getDoctrine()
                 ->getRepository(Produit::class)
                 ->findAll();
-        } catch (\Exception $e){
-            return new Response('Erreur bdd');
-        }
+
 
 
             $totalQte = 0;
@@ -62,9 +59,9 @@ class AppController extends AbstractController
     {
         $produit= new Produit();
 
-        $produitRepository = $this->getDoctrine()
-            ->getRepository(Produit::class)
-            ->findAll();
+    $produitRepository = $this->getDoctrine()
+        ->getRepository(Produit::class)
+        ->findAll();
 
 
         $form = $this->createForm(ProduitsType::class, $produit);
