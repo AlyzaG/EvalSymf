@@ -10,23 +10,28 @@ use App\Form\ProduitsType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class AppController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/home", name="home")
      */
     public function index(Request $request,  EntityManagerInterface $entityManager)
     {
+        try {
 
-        $PanierRepository = $this->getDoctrine()
-            ->getRepository(Panier::class)
-            ->findAll();
+            $PanierRepository = $this->getDoctrine()
+                ->getRepository(Panier::class)
+                ->findAll();
 
-        $ProduitRepository = $this->getDoctrine()
-            ->getRepository(Produit::class)
-            ->findAll();
+            $ProduitRepository = $this->getDoctrine()
+                ->getRepository(Produit::class)
+                ->findAll();
+        } catch (\Exception $e){
+            return new Response('Erreur bdd');
+        }
 
 
             $totalQte = 0;
