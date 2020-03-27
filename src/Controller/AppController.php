@@ -29,8 +29,6 @@ class AppController extends AbstractController
                 ->getRepository(Produit::class)
                 ->findAll();
 
-
-
             $totalQte = 0;
             $totalMontant = 0;
             $prix = 0;
@@ -45,8 +43,7 @@ class AppController extends AbstractController
         return $this->render('app/index.html.twig', [
             'panier'=> $PanierRepository,
             'Quantite' => $totalQte,
-            'somme' =>$prix,
-            'total' => $prixTotal
+            'somme' =>$prix
 
         ]);
     }
